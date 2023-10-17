@@ -1,0 +1,7 @@
+.env
+*.yaml
+
+bin
+.idea
+.DS_Store
+logs
