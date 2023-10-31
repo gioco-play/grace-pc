@@ -63,7 +63,6 @@ func (s *Set) Close() {
 }
 
 func (s *Set) Background() {
-	s.Add(1)
 	signal.Notify(s.Signal, syscall.SIGHUP, syscall.SIGINT, syscall.SIGTERM,
 		syscall.SIGQUIT, syscall.SIGUSR1, syscall.SIGUSR2)
 sign:
