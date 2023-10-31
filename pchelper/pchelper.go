@@ -88,9 +88,9 @@ sign:
 
 type ProduceFunc func(*Set, Ch, ...interface{})
 
-func (s *Set) Produce(f ProduceFunc, c Ch, params ...interface{}) {
+func (s *Set) Produce(f func() ProduceFunc, c Ch, params ...interface{}) {
 	s.Add(1)
-	f(s, c, params...)
+	f()(s, c, params...)
 	defer func() {
 		fmt.Println("生產者關閉")
 		s.Done()
@@ -101,9 +101,9 @@ func (s *Set) Produce(f ProduceFunc, c Ch, params ...interface{}) {
 
 type ConsumeFunc func(*Set, Ch, ...interface{})
 
-func (s *Set) Consume(f ConsumeFunc, c Ch, params ...interface{}) {
+func (s *Set) Consume(f func() ConsumeFunc, c Ch, params ...interface{}) {
 	s.Add(1)
-	f(s, c, params...)
+	f()(s, c, params...)
 	defer func() {
 		fmt.Println("消費者關閉")
 		s.Done()
